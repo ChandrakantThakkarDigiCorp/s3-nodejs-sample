@@ -3,7 +3,7 @@
 ##### Created on: 13th January,2017
 
 ---
-###### These are simple Node.js applications illustrating usage of the AWS SDK for Node.js.To use this just dowload this example and follow below steps.
+###### This is a node module illustrating usage of the AWS SDK for Node.js.To use this just dowload this module,create config.js file to set credentials and use below functions.
 ---
 
 ## Requirements
@@ -19,11 +19,13 @@ You need to set up your AWS security credentials before the sample code is able
 to connect to AWS. You can do this by creating setting accessKeyId,secretAccessKey,proxy parameters in config.js file.
 Open config.js file and set the parameters:
 
-    [default]
     credentials={
      "accessKeyId" : "****",
      "secretAccessKey" :"****",
      "proxy":"****"
+    }
+    module.exports={
+     credentials:credentials
     }
 
 See the [Security Credentials](http://aws.amazon.com/security-credentials) page.
@@ -37,38 +39,173 @@ Proxy is required if you are using your company's internet else set "localhost" 
 
 ## Running the S3 sample
 
-#### Create Bucket
+     node sampleFile.js
 
-     node createBucket.js
+## List of Functions
+1. createBucket()
+2. createFile()
+3. uploadFile()
+4. getUploadedFile()
+5. getFileData()
+6. listAllBucket()
+7. listAllFiles()
+8. removeFile()
+9. removeBucket()
 
-#### Create File in Bucket
 
-     node createFile.js
+#### 1.  createBucket()
 
-#### Get file data to local storage
 
-     node getFileData.js
+* _Example_
 
-#### upload image to Bucket
+```javascript
+var s3BucketMgt=require("s3-nodejs-sample");
+var bucketName="node-sdk-sample-cbt-003";
+s3BucketMgt.createBucket(bucketName,function(data){
+ if(data.status==false){
+  console.log("Error in Bucket Creation:"+data.error);
+ }else{
+  console.log("Bucket Created");
+ }
+});
+```
 
-     node uploadFile.js
+#### 2.  createFile()
 
-#### get uploaded image to local storage
 
-     node getUploadedFile.js    
+* _Example_
 
-#### List all Buckets from your AWS account
+```javascript
+s3BucketMgt=require("s3-nodejs-sample");
+var bucketName="node-sdk-sample-cbt-003";
+var fileName="sampleFile.txt";
+var fileContents="This is demo created by Chandrakant Thakkar.";
+s3BucketMgt.createFile(bucketName,fileName,fileContents,function(data){
+ if(data.status==false){
+  console.log("Error in File Creation:"+data.error);
+ }else{
+  console.log("File Created in Bucket.");
+ }
+});
+```
 
-     node listAllBucket.js
+#### 3.  uploadFile()
 
-#### List all file from Bucket
 
-     node listAllFiles.js
+* _Example_
 
-#### Remove file from Bucket
+```javascript
+s3BucketMgt=require("s3-nodejs-sample");
+var bucketName="node-sdk-sample-cbt-003";
+var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
+s3BucketMgt.uploadFile(bucketName,fileToUpload,function(data){
+ if(data.status==false){
+  console.log("Error in Upload file:"+data.error);
+ }else{
+  console.log("File Uploaded in Bucket.");
+ }
+});
+```
 
-     node deleteFile.js
+#### 4.  getUploadedFile()
 
-#### Remove Bucket
 
-     node removeBucket.js
+* _Example_
+
+```javascript
+s3BucketMgt=require("s3-nodejs-sample");
+var bucketName="node-sdk-sample-cbt-003";
+s3BucketMgt.getUploadedFile(bucketName,"logo.jpg","null",function(data){
+ if(data.status==false){
+  console.log("Error in getting uploaded File:"+data.error);
+ }else{
+  console.log("File created on Local.");
+ }
+});
+```
+
+#### 5.  getFileData()
+
+
+* _Example_
+
+```javascript
+s3BucketMgt=require("s3-nodejs-sample");
+var bucketName="node-sdk-sample-cbt-003";
+var fileName="sampleFile.txt";
+s3BucketMgt.getFileData(bucketName,fileName,"null",function(data){
+ if(data.status==false){
+  console.log("Error in getting File data:"+data.error);
+ }else{
+  console.log("File created on Local.");
+ }
+});
+```
+
+#### 6.  listAllBucket()
+
+
+* _Example_
+
+```javascript
+s3BucketMgt=require("s3-nodejs-sample");
+s3BucketMgt.listAllBucket(function(data){
+ if(data.status==false){
+  console.log("Error in getting list of Buckets:"+data.error);
+ }else{
+  console.log("Buckets:"+JSON.stringify(data.content));
+ }
+});
+```
+
+#### 7.  listAllFiles()
+
+
+* _Example_
+
+```javascript
+s3BucketMgt=require("s3-nodejs-sample");
+var bucketName="node-sdk-sample-cbt-003";
+s3BucketMgt.listAllFiles(bucketName,function(data){
+ if(data.status==false){
+  console.log("Error in getting list of Files:"+data.error);
+ }else{
+  console.log("Files In Bucket:"+(data.content));
+ }
+});
+```
+
+#### 8.  removeFile()
+
+
+* _Example_
+
+```javascript
+s3BucketMgt=require("s3-nodejs-sample");
+var bucketName="node-sdk-sample-cbt-003";
+var fileName="sampleFile.txt";
+s3BucketMgt.removeFile(bucketName,fileName,function(data){
+ if(data.status==false){
+  console.log("Error in Remove file:"+data.error);
+ }else{
+  console.log("File removed on from Bucket:"+bucketName);
+ }
+});
+```
+
+#### 9.  removeBucket()
+
+
+* _Example_
+
+```javascript
+s3BucketMgt=require("s3-nodejs-sample");
+var bucketName="node-sdk-sample-cbt-003";
+s3BucketMgt.removeBucket(bucketName,function(data){
+ if(data.status==false){
+  console.log("Error in Remove Bucket:"+data.error);
+ }else{
+  console.log("Bucket is removed:"+bucketName);
+ }
+});
+```
