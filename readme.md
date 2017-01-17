@@ -98,13 +98,25 @@ s3BucketMgt.createFile(bucketName,fileName,fileContents,function(data){
 s3BucketMgt=require("s3-nodejs-sample");
 var bucketName="node-sdk-sample-cbt-003";
 var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
-s3BucketMgt.uploadFile(bucketName,fileToUpload,function(data){
+s3BucketMgt.uploadFile(bucketName,fileToUpload,"null",function(data){
  if(data.status==false){
   console.log("Error in Upload file:"+data.error);
  }else{
   console.log("File Uploaded in Bucket.");
  }
 });
+
+or
+//CBT:create file with specific name
+var fileToCreate="sample.jpg"
+s3BucketMgt.uploadFile(bucketName,fileToUpload,"fileToCreate",function(data){
+ if(data.status==false){
+  console.log("Error in Upload file:"+data.error);
+ }else{
+  console.log("File Uploaded in Bucket.");
+ }
+});
+
 ```
 
 #### 4.  getUploadedFile()

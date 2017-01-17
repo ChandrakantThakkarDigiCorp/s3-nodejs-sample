@@ -4,7 +4,8 @@ var bucketName="node-sdk-sample-cbt-003";
 var fileName="sampleFile.txt";
 var fileContents="This is demo created by Chandrakant Thakkar."
 var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
-// s3BucketMgt.createBucket(bucketName,config,function(data){
+
+ // s3BucketMgt.createBucket(bucketName,config,function(data){
 //  if(data.status==false){
 //   console.log("Error in Bucket Creation:"+data.error);
 //  }else{
@@ -20,7 +21,7 @@ var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
 //  }
 // });
 
-// s3BucketMgt.uploadFile(bucketName,fileToUpload,config,function(data){
+// s3BucketMgt.uploadFile(bucketName,fileToUpload,"null",config,function(data){
 //  if(data.status==false){
 //   console.log("Error in Upload file:"+data.error);
 //  }else{
@@ -28,7 +29,7 @@ var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
 //  }
 // });
 
-// s3BucketMgt.getUploadedFile(bucketName,"logo.jpg","null",config,function(data){
+// s3BucketMgt.getUploadedFile(bucketName,"logo1.jpg","null",config,function(data){
 //  if(data.status==false){
 //   console.log("Error in getting uploaded File:"+data.error);
 //  }else{
@@ -44,13 +45,13 @@ var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
 //  }
 // });
 
-s3BucketMgt.listAllBucket(config,function(data){
- if(data.status==false){
-  console.log("Error in getting list of Buckets:"+data.error);
- }else{
-  console.log("Buckets:"+JSON.stringify(data.content));
- }
-});
+// s3BucketMgt.listAllBucket(config,function(data){
+//  if(data.status==false){
+//   console.log("Error in getting list of Buckets:"+data.error);
+//  }else{
+//   console.log("Buckets:"+JSON.stringify(data.content));
+//  }
+// });
 
 // s3BucketMgt.listAllFiles(bucketName,config,function(data){
 //  if(data.status==false){
@@ -60,7 +61,7 @@ s3BucketMgt.listAllBucket(config,function(data){
 //  }
 // });
 
-// s3BucketMgt.removeFile(bucketName,fileName,config,function(data){
+// s3BucketMgt.removeFile(bucketName,"logo.jpg",config,function(data){
 //  if(data.status==false){
 //   console.log("Error in Remove file:"+data.error);
 //  }else{
@@ -73,5 +74,21 @@ s3BucketMgt.listAllBucket(config,function(data){
 //   console.log("Error in Remove Bucket:"+data.error);
 //  }else{
 //   console.log("Bucket is removed:"+bucketName);
+//  }
+// });
+
+// s3BucketMgt.getBucketPermission(bucketName,config,function(data){
+//  if(data.status==false){
+//   console.log("Error in getting list of Buckets:"+data.error);
+//  }else{
+//   console.log("Buckets:"+JSON.stringify(data.content));
+//  }
+// });
+
+// s3BucketMgt.isBucketExist(bucketName,config,function(data){
+//  if(data.status==false){
+//   console.log("error in isBucketExist:"+data.error);
+//  }else{
+//   console.log("Bucket exist:"+data.isExist);
 //  }
 // });
