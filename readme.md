@@ -51,7 +51,8 @@ Proxy is required if you are using your company's internet else set "localhost" 
 7. listAllFiles()
 8. removeFile()
 9. removeBucket()
-
+10. getBucketPermission()
+11. isBucketExist()
 
 #### 1.  createBucket()
 
@@ -60,8 +61,9 @@ Proxy is required if you are using your company's internet else set "localhost" 
 
 ```javascript
 var s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
 var bucketName="node-sdk-sample-cbt-003";
-s3BucketMgt.createBucket(bucketName,function(data){
+s3BucketMgt.createBucket(bucketName,config,function(data){
  if(data.status==false){
   console.log("Error in Bucket Creation:"+data.error);
  }else{
@@ -77,10 +79,11 @@ s3BucketMgt.createBucket(bucketName,function(data){
 
 ```javascript
 s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
 var bucketName="node-sdk-sample-cbt-003";
 var fileName="sampleFile.txt";
 var fileContents="This is demo created by Chandrakant Thakkar.";
-s3BucketMgt.createFile(bucketName,fileName,fileContents,function(data){
+s3BucketMgt.createFile(bucketName,fileName,fileContents,config,function(data){
  if(data.status==false){
   console.log("Error in File Creation:"+data.error);
  }else{
@@ -96,9 +99,10 @@ s3BucketMgt.createFile(bucketName,fileName,fileContents,function(data){
 
 ```javascript
 s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
 var bucketName="node-sdk-sample-cbt-003";
 var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
-s3BucketMgt.uploadFile(bucketName,fileToUpload,"null",function(data){
+s3BucketMgt.uploadFile(bucketName,fileToUpload,"null",config,function(data){
  if(data.status==false){
   console.log("Error in Upload file:"+data.error);
  }else{
@@ -109,7 +113,7 @@ s3BucketMgt.uploadFile(bucketName,fileToUpload,"null",function(data){
 or
 //CBT:create file with specific name
 var fileToCreate="sample.jpg"
-s3BucketMgt.uploadFile(bucketName,fileToUpload,"fileToCreate",function(data){
+s3BucketMgt.uploadFile(bucketName,fileToUpload,fileToCreate,config,function(data){
  if(data.status==false){
   console.log("Error in Upload file:"+data.error);
  }else{
@@ -126,8 +130,9 @@ s3BucketMgt.uploadFile(bucketName,fileToUpload,"fileToCreate",function(data){
 
 ```javascript
 s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
 var bucketName="node-sdk-sample-cbt-003";
-s3BucketMgt.getUploadedFile(bucketName,"logo.jpg","null",function(data){
+s3BucketMgt.getUploadedFile(bucketName,"logo.jpg","null",config,function(data){
  if(data.status==false){
   console.log("Error in getting uploaded File:"+data.error);
  }else{
@@ -143,9 +148,10 @@ s3BucketMgt.getUploadedFile(bucketName,"logo.jpg","null",function(data){
 
 ```javascript
 s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
 var bucketName="node-sdk-sample-cbt-003";
 var fileName="sampleFile.txt";
-s3BucketMgt.getFileData(bucketName,fileName,"null",function(data){
+s3BucketMgt.getFileData(bucketName,fileName,"null",config,function(data){
  if(data.status==false){
   console.log("Error in getting File data:"+data.error);
  }else{
@@ -161,7 +167,8 @@ s3BucketMgt.getFileData(bucketName,fileName,"null",function(data){
 
 ```javascript
 s3BucketMgt=require("s3-nodejs-sample");
-s3BucketMgt.listAllBucket(function(data){
+var config=require("./config.js");
+s3BucketMgt.listAllBucket(config,function(data){
  if(data.status==false){
   console.log("Error in getting list of Buckets:"+data.error);
  }else{
@@ -177,8 +184,9 @@ s3BucketMgt.listAllBucket(function(data){
 
 ```javascript
 s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
 var bucketName="node-sdk-sample-cbt-003";
-s3BucketMgt.listAllFiles(bucketName,function(data){
+s3BucketMgt.listAllFiles(bucketName,config,function(data){
  if(data.status==false){
   console.log("Error in getting list of Files:"+data.error);
  }else{
@@ -194,9 +202,10 @@ s3BucketMgt.listAllFiles(bucketName,function(data){
 
 ```javascript
 s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
 var bucketName="node-sdk-sample-cbt-003";
 var fileName="sampleFile.txt";
-s3BucketMgt.removeFile(bucketName,fileName,function(data){
+s3BucketMgt.removeFile(bucketName,fileName,config,function(data){
  if(data.status==false){
   console.log("Error in Remove file:"+data.error);
  }else{
@@ -212,12 +221,49 @@ s3BucketMgt.removeFile(bucketName,fileName,function(data){
 
 ```javascript
 s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
 var bucketName="node-sdk-sample-cbt-003";
-s3BucketMgt.removeBucket(bucketName,function(data){
+s3BucketMgt.removeBucket(bucketName,config,function(data){
  if(data.status==false){
   console.log("Error in Remove Bucket:"+data.error);
  }else{
   console.log("Bucket is removed:"+bucketName);
+ }
+});
+```
+
+#### 10.  getBucketPermission()
+
+
+* _Example_
+
+```javascript
+s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
+var bucketName="node-sdk-sample-cbt-003";
+s3BucketMgt.getBucketPermission(bucketName,config,function(data){
+ if(data.status==false){
+  console.log("Error in getting list of Buckets:"+data.error);
+ }else{
+  console.log("Buckets:"+JSON.stringify(data.content));
+ }
+});
+```
+
+#### 11.  getBucketPermission()
+
+
+* _Example_
+
+```javascript
+s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
+var bucketName="node-sdk-sample-cbt-003";
+s3BucketMgt.isBucketExist(bucketName,config,function(data){
+ if(data.status==false){
+  console.log("error in isBucketExist:"+data.error);
+ }else{
+  console.log("Bucket exist:"+data.isExist);
  }
 });
 ```
