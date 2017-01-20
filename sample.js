@@ -1,6 +1,6 @@
 var s3BucketMgt=require("s3-nodejs-sample");
 var config=require("./config.js");
-var bucketName="node-sdk-sample-cbt-003";
+var bucketName="match-media-cbt";
 var fileName="sampleFile.txt";
 var fileContents="This is demo created by Chandrakant Thakkar."
 var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
@@ -21,7 +21,7 @@ var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
 //  }
 // });
 
-// s3BucketMgt.uploadFile(bucketName,fileToUpload,"null",config,function(data){
+// s3BucketMgt.uploadFile(bucketName,fileToUpload,null,config,function(data){
 //  if(data.status==false){
 //   console.log("Error in Upload file:"+data.error);
 //  }else{
@@ -29,7 +29,7 @@ var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
 //  }
 // });
 
-// s3BucketMgt.getUploadedFile(bucketName,"logo1.jpg","null",config,function(data){
+// s3BucketMgt.getUploadedFile(bucketName,"logo.jpg",null,config,function(data){
 //  if(data.status==false){
 //   console.log("Error in getting uploaded File:"+data.error);
 //  }else{
@@ -37,7 +37,15 @@ var fileToUpload = "D:/gitHub/awt-nodejs-sample/s3-nodejs-sample/logo.jpg";
 //  }
 // });
 
-// s3BucketMgt.getFileData(bucketName,fileName,"null",config,function(data){
+// s3BucketMgt.getObject(bucketName,"logo1.jpg",config,function(data){
+//  if(data.status==false){
+//   console.log("Error in getting uploaded File:"+data.error.code);
+//  }else{
+//   console.log("Content of File:"+data.content.Body);
+//  }
+// });
+
+// s3BucketMgt.getFileData(bucketName,fileName,null,config,function(data){
 //  if(data.status==false){
 //   console.log("Error in getting File data:"+data.error);
 //  }else{

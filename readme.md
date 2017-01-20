@@ -53,6 +53,7 @@ Proxy is required if you are using your company's internet else set "localhost" 
 9. removeBucket()
 10. getBucketPermission()
 11. isBucketExist()
+12. getObject()
 
 #### 1.  createBucket()
 
@@ -250,7 +251,7 @@ s3BucketMgt.getBucketPermission(bucketName,config,function(data){
 });
 ```
 
-#### 11.  getBucketPermission()
+#### 11.  isBucketExist()
 
 
 * _Example_
@@ -264,6 +265,26 @@ s3BucketMgt.isBucketExist(bucketName,config,function(data){
   console.log("error in isBucketExist:"+data.error);
  }else{
   console.log("Bucket exist:"+data.isExist);
+ }
+});
+```
+
+#### 12.  getObject()
+
+
+* _Example_
+
+```javascript
+//CBT:It will return binary format of data
+s3BucketMgt=require("s3-nodejs-sample");
+var config=require("./config.js");
+var bucketName="node-sdk-sample-cbt-003";
+var fileName="logo.jpg";
+s3BucketMgt.getObject(bucketName,fileName,config,function(data){
+ if(data.status==false){
+  console.log("error in getObject:"+data.error.code);
+ }else{
+  console.log("Object data in Binary:"+data.content.Body);
  }
 });
 ```
